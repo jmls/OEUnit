@@ -22,14 +22,9 @@ CLASS OEUnit.Tests.Assertion.AssertTest:
 
     Assert:IsTrue(TRUE).
 
-    DO ON ERROR UNDO, THROW:
-      Assert:IsTrue(FALSE).
-      CATCH e AS AssertionFailedError:
-        DELETE OBJECT e NO-ERROR.
-        RETURN.         
-      END CATCH.      
-    END.
-    Assert:Fail().    
+    Assert:IsTrue(FALSE) no-error.
+    Assert:didError().
+    
   END METHOD.  
 
   @Test.

@@ -34,6 +34,7 @@ CLASS OEUnit.Reflection.AnnotationInfo:
       attribute = TRIM(SUBSTRING(annotationString, LENGTH(AnnotationType) + 1),"()")
       AttributeName = ENTRY(1, attribute, "=")
       AttributeValue = SUBSTRING(attribute, LENGTH(AttributeName) + 2).
+      
   END CONSTRUCTOR.
 
 END CLASS.

@@ -4,7 +4,7 @@ USING OEUnit.Assertion.*.
 
 CLASS OEUnit.Tests.Assertion.AssertStringTest:
 
-  @Test.
+  @Test(description="doo",foo="bar").
   METHOD PUBLIC VOID IsNullOrEmpty():
     DEFINE VARIABLE String1 AS CHARACTER NO-UNDO.
     String1 = "".

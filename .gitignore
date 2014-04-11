@@ -10,6 +10,7 @@ tmp/
 *.tmp
 *.bak
 *.swp
+*.r
 *~.nib
 local.properties
 .classpath
@@ -161,3 +162,4 @@ pip-log.txt
 
 # Mac crap
 .DS_Store
+/.propath
