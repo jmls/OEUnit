@@ -326,7 +326,7 @@ CLASS OEUnit.Assertion.Assert:
            lv_Type             = substr(file-info:file-type,1,1)
            file-info:file-name = lv_file.
 
-    AreEqual(p_type,lv_type).    
+    AreEqual(lv_type,p_type).    
   end method.  
 
   /** generate md5-digest on src and compare with md5 in file

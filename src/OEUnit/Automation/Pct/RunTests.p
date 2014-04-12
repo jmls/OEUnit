@@ -24,7 +24,7 @@ DEFINE VARIABLE classFiles AS LONGCHAR NO-UNDO.
 
 FILE-INFO:FILE-NAME = testLocation.
 IF SUBSTRING(FILE-INFO:FILE-TYPE, 1, 1) = "F" THEN DO:
-  classFiles = testLocation.
+  classFiles = testLocation. 
 END.
 ELSE DO:
   /* the testLocation is a directory, create a list of test classes */
@@ -33,6 +33,8 @@ END.
 
 DEFINE VARIABLE i AS INTEGER NO-UNDO.
 DEFINE VARIABLE classFile AS CHARACTER NO-UNDO.
+
+assign outputDirectory = right-trim(outputDirectory,if opsys eq "WIN32" then "\" else "/").
 
 REPEAT i = 1 TO NUM-ENTRIES(classFiles, "*"):
   classFile = ENTRY(i, classFiles, "*").
@@ -49,12 +51,13 @@ PROCEDURE RunClassAsTest PRIVATE:
       
   DEFINE VARIABLE test AS Object NO-UNDO.
   test = Instance:FromFile(classFile).
-  
+
   DEFINE VARIABLE runner AS OEUnitRunner NO-UNDO.
   runner = NEW OEUnitRunner().
 
   /* Run your test case or suite */
   runner:RunTest(test).
+  
   IF runner:Results:GetStatus() <> TestResult:StatusPassed THEN
     hasErrors = TRUE.
 
