@@ -40,6 +40,16 @@ routine-level on error undo, throw.
 
 class OEUnit.Util.Fixture: 
   
+  /** return filename from the fixtures directory
+   *  param: name of file to use
+   *  return: fullpath of file , error if file does not exist
+   */
+   
+  method static char pathName(p_object as Progress.Lang.Object,p_file as char):
+    return substitute("&1/fixture/&2",replace(p_object:GetClass():Package,".","/")
+                                                                         ,p_file).
+  end method.
+
   /** load a file from the fixtures directory
    *  param: name of file to load
    *  return: file contents, error if file does not exist
@@ -49,6 +59,8 @@ class OEUnit.Util.Fixture:
     def var lv_data as longchar no-undo.
     
     def var lv_file as char no-undo.
+    
+    fix-codepage(lv_Data) = "UTF-8".
     
     /** store current value of file-info in case needed after this method */
     
@@ -67,4 +79,6 @@ class OEUnit.Util.Fixture:
     end finally.
     
   end method.  
+  
+  
 end class.
