@@ -40,6 +40,15 @@ routine-level on error undo, throw.
 
 class OEUnit.Util.Fixture: 
   
+  /** return fixtures directory
+   *  param: parent object
+   *  return: fullpath of directory
+   */
+   
+  method static char directoryPath(p_object as Progress.Lang.Object):
+    return substitute("&1/fixture",replace(p_object:GetClass():Package,".","/")).
+  end method.
+
   /** return filename from the fixtures directory
    *  param: name of file to use
    *  return: fullpath of file , error if file does not exist

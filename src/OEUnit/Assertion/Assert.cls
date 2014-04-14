@@ -37,16 +37,36 @@ CLASS OEUnit.Assertion.Assert:
     If not then throws an AssertionFailedError.
   ----------------------------------------------------------------------------*/
 	method static void didError(  ):
-		isTrue(error-status:num-messages ne 0,error-status:get-message(1)).
-		return.
+	  didError("").
 	end method.
 
+ /*----------------------------------------------------------------------------
+    Asserts that an error was encountered in the last statement with a no-error 
+    If not then throws an AssertionFailedError.
+  ----------------------------------------------------------------------------*/
+  method static void didError(failMessage as char):
+    isTrue(error-status:num-messages ne 0,if failMessage eq ? or failMessage eq ""
+                                             then error-status:get-message(1)
+                                             else failMessage).
+    return.
+  end method.
+
+/*----------------------------------------------------------------------------
+    Asserts that no error was encountered in the last statement with a no-error 
+    If not then throws an AssertionFailedError.
+  ----------------------------------------------------------------------------*/
+  method static void didNotError():
+    didNotError("").
+  end method.
+ 
  /*----------------------------------------------------------------------------
     Asserts that no error was encountered in the last statement with a no-error 
     If not then throws an AssertionFailedError.
   ----------------------------------------------------------------------------*/
-  method static void didNotError(  ):
-    isTrue(error-status:num-messages eq 0,error-status:get-message(1)).
+  method static void didNotError(failMessage as char):
+    isTrue(error-status:num-messages eq 0,if failMessage eq ? or failMessage eq ""
+                                             then error-status:get-message(1)
+                                             else failMessage).
     return.
   end method.
 
@@ -362,6 +382,25 @@ CLASS OEUnit.Assertion.Assert:
     
     MD5(p_src,string(lv_md5)).
   end method.
+
+  /** assert that specified db alias is connected
+   *  @param: alias to check
+   */
+
+  method static void DBConnected(p_alias as char):
+    DBConnected(p_alias,"").
+  end method.
+  
+  /** assert that specified db alias is connected
+   *  @param: alias to check
+   *  @param: error message to use for a fail
+   */
+
+  method static void DBConnected(p_alias as char,p_errorMessage as char):
+    isTrue(connected(p_alias),p_errorMessage).
+  end method.
+  
+    
 
   /*----------------------------------------------------------------------------
     If success is false, then throws an AssertionFailedError.  
