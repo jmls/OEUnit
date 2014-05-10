@@ -77,7 +77,7 @@ class OEUnit.Util.Fixture:
            file-info:file-name = substitute("&1/fixture/&2",replace(p_object:GetClass():Package,".","/")
                                                            ,p_file).
 
-    if file-info:full-pathname eq ? then undo, throw new AppError(substitute("invalid file &1",p_file),0).
+    if file-info:full-pathname eq ? then undo, throw new AppError(substitute("invalid fixture file &1",p_file),0).
         
     copy-lob from file file-info:full-pathname to lv_data.
     
